@@ -21,6 +21,7 @@ export function Welcome() {
         </header>
         <div className="max-w-[300px] w-full space-y-6 px-4">
           <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
+          <h1 className="text-4xl font-bold text-pink-500">Hello 知食光</h1>
             <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
              成功了哈哈ㄋ
             </p>
