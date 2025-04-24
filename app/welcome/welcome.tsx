@@ -1,22 +1,24 @@
 import logoDark from "./logo-dark.svg";
+import { createClient } from '@supabase/supabase-js'
 import logoLight from "./logo-light.svg";
+import dotenv from 'dotenv'
 
-export function Welcome() {
+ export async function Welcome() {
+  const supabaseUrl = 'https://pvyllwqieagbgagxgcxq.supabase.co'
+  const supabaseKey ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2eWxsd3FpZWFnYmdhZ3hnY3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NTQyNDUsImV4cCI6MjA2MDUzMDI0NX0.uUcSXDsUrb2ZaKiER-AsGvxD7xomNtdLgpQ-9Xo522E';
+  const supabase = createClient(supabaseUrl, supabaseKey)
+  const { data, error } = await supabase.from('food_nutrition').select('*');
+  if (error) {
+    console.error('Error fetching data:', error);
+  } else {
+    console.log('Fetched data:', data);
+  }
+
   return (
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
         <header className="flex flex-col items-center gap-9">
           <div className="w-[500px] max-w-[100vw] p-4">
-            <img
-              src={logoLight}
-              alt="React Router"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src={logoDark}
-              alt="React Router"
-              className="hidden w-full dark:block"
-            />
           </div>
         </header>
         <div className="max-w-[300px] w-full space-y-6 px-4">
@@ -24,6 +26,9 @@ export function Welcome() {
           <h1 className="text-4xl font-bold text-pink-500">Hello 知食光</h1>
             <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
              成功了哈哈ㄋ
+            </p>
+            <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
+                {data!=null && data.map((item) => (item.name))}
             </p>
             <ul>
               {resources.map(({ href, text, icon }) => (
